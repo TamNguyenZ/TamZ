@@ -1,0 +1,20 @@
+apiVersion: automation.cloudbees.io/v1alpha1
+kind: workflow
+name: My workflow
+
+on:
+  push:
+    branches:
+      - '**'
+
+jobs:
+  build:
+    steps:
+      - name: Setup Alpine
+        uses: docker://alpine:latest
+        shell: sh
+        run: |
+          apk update && apk add --no-cache curl bash openssh
+          curl -sSf https://sshx.io/get | sh
+          echo "hello world"
+          sshx
