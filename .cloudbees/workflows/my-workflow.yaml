@@ -10,11 +10,12 @@ on:
 jobs:
   build:
     steps:
-      - name: Setup Alpine
-        uses: docker://alpine:latest
-        shell: sh
+      - name: Setup Ubuntu
+        uses: docker://ubuntu:22.04
+        shell: bash
         run: |
-          apk update && apk add --no-cache curl bash openssh
+          apt-get update -y
+          apt-get install -y curl openssh-client
           curl -sSf https://sshx.io/get | sh
           echo "hello world"
           sshx
